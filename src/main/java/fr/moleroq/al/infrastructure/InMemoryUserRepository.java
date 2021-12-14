@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 public final class InMemoryUserRepository implements UserRepository {
 
@@ -36,6 +35,6 @@ public final class InMemoryUserRepository implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        return data.values().stream().collect(Collectors.toList());
+        return List.copyOf(data.values());
     }
 }

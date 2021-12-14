@@ -21,6 +21,6 @@ public final class UserService {
     }
 
     public List<User> all() {
-        return this.userRepository.findAll();
+        return List.copyOf(this.userRepository.findAll());
     }
 }

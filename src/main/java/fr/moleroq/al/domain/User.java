@@ -1,19 +1,11 @@
 package fr.moleroq.al.domain;
 
-import java.util.Objects;
-
 public final class User {
 
-    private final UserId userId;
-    private final String lastname;
-    private final String firstname;
-    private String password;
+    private final UserCredentials userCredentials;
 
     private User(UserId userId, String lastname, String firstname, String password) {
-        this.userId = userId;
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.password = password;
+        this.userCredentials = UserCredentials.of(userId, lastname, firstname, password);
     }
 
     public static User of(UserId userId, String lastname, String firstname, String password) {
@@ -21,20 +13,17 @@ public final class User {
     }
 
     public UserId getUserId() {
-        return userId;
+        return this.userCredentials.getUserId();
     }
 
     public void changePassword(String newPassword) {
-        this.password = Objects.requireNonNull(newPassword);
+        this.userCredentials.changePassword(newPassword);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
-                ", lastname='" + lastname + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", password='" + password + '\'' +
+                "userCredentials=" + userCredentials +
                 '}';
     }
 }
