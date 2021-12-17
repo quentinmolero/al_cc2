@@ -11,11 +11,19 @@ public class Payment {
     }
 
     public static Payment of(long amount, Date date, PaymentId paymentId) {
-        return new Payment(amount, date, paymentId);
+        Payment payment =  new Payment(amount, date, paymentId);
+        if (ValidationPaymentEngine.getInstance().test(payment)) {
+            return payment;
+        }
+        throw new IllegalStateException("Illegal arguments");
     }
 
     public long getAmount() {
         return this.paymentCredentials.getAmount();
+    }
+
+    public Date getPaymentDate() {
+        return this.paymentCredentials.getDate();
     }
 
     public PaymentId getPaymentId() {

@@ -9,11 +9,27 @@ public final class User {
     }
 
     public static User of(UserId userId, String lastname, String firstname, String password) {
-        return new User(userId, lastname, firstname, password);
+        User user = new User(userId, lastname, firstname, password);
+        if (ValidationUserEngine.getInstance().test(user)) {
+            return user;
+        }
+        throw new IllegalArgumentException("Illegal arguments");
     }
 
     public UserId getUserId() {
         return this.userCredentials.getUserId();
+    }
+
+    public String getUserLastname() {
+        return this.userCredentials.getLastname();
+    }
+
+    public String getUserFirstname() {
+        return this.userCredentials.getFirstname();
+    }
+
+    public String getUserPassword() {
+        return this.userCredentials.getPassword();
     }
 
     public void changePassword(String newPassword) {

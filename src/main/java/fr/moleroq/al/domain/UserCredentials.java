@@ -24,6 +24,18 @@ public class UserCredentials {
         return this.userId;
     }
 
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public void changePassword(String newPassword) {
         this.password = Objects.requireNonNull(newPassword);
     }

@@ -28,6 +28,10 @@ public class PaymentCredentials {
         return simpleDateFormat.format(this.date);
     }
 
+    public Date getDate() {
+        return date;
+    }
+
     public PaymentId getPaymentId() {
         return paymentId;
     }
