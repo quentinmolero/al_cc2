@@ -1,4 +1,6 @@
-package fr.moleroq.al.domain;
+package fr.moleroq.al.application;
+
+import fr.moleroq.al.domain.*;
 
 import java.util.List;
 import java.util.Map;

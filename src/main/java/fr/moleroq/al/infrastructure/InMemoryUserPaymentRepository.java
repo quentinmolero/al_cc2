@@ -4,6 +4,7 @@ import fr.moleroq.al.domain.PaymentId;
 import fr.moleroq.al.domain.UserId;
 import fr.moleroq.al.domain.UserPaymentRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +15,14 @@ public class InMemoryUserPaymentRepository implements UserPaymentRepository {
 
     @Override
     public void save(UserId userId, PaymentId paymentId) {
-        data.get(userId).add(paymentId);
+        var userPayments = data.get(userId);
+        if (userPayments == null) {
+            List<PaymentId> paymentIdList = new ArrayList<>();
+            paymentIdList.add(paymentId);
+            data.put(userId, paymentIdList);
+        } else {
+            userPayments.add(paymentId);
+        }
     }
 
     @Override

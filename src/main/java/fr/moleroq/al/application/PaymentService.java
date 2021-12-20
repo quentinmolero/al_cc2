@@ -1,4 +1,7 @@
-package fr.moleroq.al.domain;
+package fr.moleroq.al.application;
+
+import fr.moleroq.al.domain.Payment;
+import fr.moleroq.al.domain.PaymentRepository;
 
 import java.util.List;
 
