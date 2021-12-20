@@ -2,7 +2,6 @@ package fr.moleroq.al.domain;
 
 import fr.moleroq.al.kernel.Engine;
 
-import java.util.Objects;
 import java.util.function.Predicate;
 
 @Engine
