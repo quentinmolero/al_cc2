@@ -3,7 +3,7 @@ package fr.moleroq.al.domain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class PaymentCredentials {
+public final class PaymentCredentials {
 
     private final long amount;
     private final Date date;

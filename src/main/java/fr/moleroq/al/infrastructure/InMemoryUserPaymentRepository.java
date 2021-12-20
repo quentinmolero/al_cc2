@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class InMemoryUserPaymentRepository implements UserPaymentRepository {
+public final class InMemoryUserPaymentRepository implements UserPaymentRepository {
 
     private final Map<UserId, List<PaymentId>> data = new ConcurrentHashMap<>();
 

@@ -2,7 +2,7 @@ package fr.moleroq.al.domain;
 
 import java.util.Date;
 
-public class Payment {
+public final class Payment {
 
     private final PaymentCredentials paymentCredentials;
 

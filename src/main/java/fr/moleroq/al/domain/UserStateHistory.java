@@ -3,7 +3,7 @@ package fr.moleroq.al.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserStateHistory {
+public final class UserStateHistory {
 
     private final List<UserState> history;
 

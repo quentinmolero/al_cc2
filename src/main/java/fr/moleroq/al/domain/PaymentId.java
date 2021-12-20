@@ -1,6 +1,6 @@
 package fr.moleroq.al.domain;
 
-public class PaymentId {
+public final class PaymentId {
 
     private final int value;
 

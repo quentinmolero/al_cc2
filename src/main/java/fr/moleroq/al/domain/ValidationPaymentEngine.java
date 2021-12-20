@@ -5,7 +5,7 @@ import fr.moleroq.al.kernel.Engine;
 import java.util.function.Predicate;
 
 @Engine
-public class ValidationPaymentEngine implements Predicate<Payment> {
+public final class ValidationPaymentEngine implements Predicate<Payment> {
 
     private static final ValidationPaymentEngine INSTANCE = new ValidationPaymentEngine();
 

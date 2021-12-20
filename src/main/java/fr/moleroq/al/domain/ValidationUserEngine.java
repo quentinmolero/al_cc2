@@ -5,7 +5,7 @@ import fr.moleroq.al.kernel.Engine;
 import java.util.function.Predicate;
 
 @Engine
-public class ValidationUserEngine implements Predicate<User> {
+public final class ValidationUserEngine implements Predicate<User> {
 
     private static final ValidationUserEngine INSTANCE = new ValidationUserEngine();
 
