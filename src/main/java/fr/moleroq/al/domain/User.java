@@ -5,7 +5,7 @@ import java.util.Objects;
 public final class User {
 
     private final UserCredentials userCredentials;
-    private final UserStateHistory history;
+    private UserStateHistory history;
 
     private User(UserId userId, String lastname, String firstname, String password, UserState initialState) {
         this.userCredentials = UserCredentials.of(userId, lastname, firstname, password);
@@ -23,7 +23,7 @@ public final class User {
     }
 
     public void changeState(UserState userState) {
-        this.history.append(userState);
+        this.history = this.history.append(userState);
     }
 
     public void changePassword(String newPassword) {
