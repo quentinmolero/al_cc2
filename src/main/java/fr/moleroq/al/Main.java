@@ -3,14 +3,11 @@ package fr.moleroq.al;
 
 import fr.moleroq.al.application.PaymentService;
 import fr.moleroq.al.application.UserPaymentService;
-import fr.moleroq.al.domain.*;
 import fr.moleroq.al.application.UserService;
+import fr.moleroq.al.domain.*;
 import fr.moleroq.al.infrastructure.InMemoryPaymentRepository;
 import fr.moleroq.al.infrastructure.InMemoryUserPaymentRepository;
 import fr.moleroq.al.infrastructure.InMemoryUserRepository;
-import fr.moleroq.al.kernel.ApplicationEvent;
-import fr.moleroq.al.kernel.EventBus;
-import fr.moleroq.al.kernel.SimpleEventBus;
 
 import java.time.Instant;
 import java.util.Date;

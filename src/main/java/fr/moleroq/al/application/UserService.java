@@ -3,8 +3,6 @@ package fr.moleroq.al.application;
 import fr.moleroq.al.domain.User;
 import fr.moleroq.al.domain.UserId;
 import fr.moleroq.al.domain.UserRepository;
-import fr.moleroq.al.kernel.ApplicationEvent;
-import fr.moleroq.al.kernel.EventBus;
 
 import java.util.List;
 
