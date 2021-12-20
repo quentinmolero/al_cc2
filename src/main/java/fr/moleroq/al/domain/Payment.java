@@ -1,6 +1,7 @@
 package fr.moleroq.al.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 public final class Payment {
 
@@ -28,5 +29,25 @@ public final class Payment {
 
     public PaymentId getPaymentId() {
         return this.paymentCredentials.getPaymentId();
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentCredentials=" + paymentCredentials +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return Objects.equals(paymentCredentials, payment.paymentCredentials);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentCredentials);
     }
 }

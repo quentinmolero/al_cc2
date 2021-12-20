@@ -2,6 +2,7 @@ package fr.moleroq.al.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public final class PaymentCredentials {
 
@@ -34,5 +35,27 @@ public final class PaymentCredentials {
 
     public PaymentId getPaymentId() {
         return paymentId;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentCredentials{" +
+                "amount=" + amount +
+                ", date=" + date +
+                ", paymentId=" + paymentId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentCredentials that = (PaymentCredentials) o;
+        return amount == that.amount && Objects.equals(date, that.date) && Objects.equals(paymentId, that.paymentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount, date, paymentId);
     }
 }

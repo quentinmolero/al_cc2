@@ -41,6 +41,19 @@ public final class UserCredentials {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserCredentials that = (UserCredentials) o;
+        return Objects.equals(userId, that.userId) && Objects.equals(lastname, that.lastname) && Objects.equals(firstname, that.firstname) && Objects.equals(password, that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, lastname, firstname, password);
+    }
+
+    @Override
     public String toString() {
         return "UserCredentials{" +
                 "userId=" + userId +

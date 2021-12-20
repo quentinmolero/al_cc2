@@ -1,5 +1,7 @@
 package fr.moleroq.al.domain;
 
+import java.util.Objects;
+
 public final class User {
 
     private final UserCredentials userCredentials;
@@ -45,9 +47,23 @@ public final class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userCredentials, user.userCredentials) && Objects.equals(history, user.history);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userCredentials, history);
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "userCredentials=" + userCredentials +
+                ", history=" + history +
                 '}';
     }
 }
