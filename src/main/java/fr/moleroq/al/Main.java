@@ -1,13 +1,14 @@
 package fr.moleroq.al;
 
 
-import fr.moleroq.al.application.PaymentService;
-import fr.moleroq.al.application.UserPaymentService;
-import fr.moleroq.al.application.UserService;
+import fr.moleroq.al.application.*;
 import fr.moleroq.al.domain.*;
 import fr.moleroq.al.infrastructure.InMemoryPaymentRepository;
 import fr.moleroq.al.infrastructure.InMemoryUserPaymentRepository;
 import fr.moleroq.al.infrastructure.InMemoryUserRepository;
+import fr.moleroq.al.kernel.ApplicationEvent;
+import fr.moleroq.al.kernel.EventBus;
+import fr.moleroq.al.kernel.SimpleEventBus;
 
 import java.time.Instant;
 import java.util.Date;
@@ -21,18 +22,23 @@ public final class Main {
         PaymentRepository paymentRepository = new InMemoryPaymentRepository();
         UserPaymentRepository userPaymentRepository = new InMemoryUserPaymentRepository();
 
-        UserService userService = new UserService(userRepository);
         PaymentService paymentService = new PaymentService(paymentRepository);
         UserPaymentService userPaymentService = new UserPaymentService(userPaymentRepository);
 
+        EventBus<ApplicationEvent> eventBus = new SimpleEventBus<>();
+        eventBus.register(UserStartSubscription.class, List.of(new UserSubscriptionListener(paymentRepository, paymentService, userPaymentService)));
+
+        UserService userService = new UserService(userRepository, eventBus);
+
         final UserId myUserId = userRepository.nextIdentity();
-        final PaymentId myPaymentId = paymentRepository.nextIdentity();
+//        final PaymentId myPaymentId = paymentRepository.nextIdentity();
 
         createUser(userService, myUserId);
-        createPayment(paymentService, myPaymentId);
-        userPaymentService.create(userRepository.byId(myUserId), paymentRepository.byId(myPaymentId));
+//        createPayment(paymentService, myPaymentId);
+//        userPaymentService.create(userRepository.byId(myUserId), paymentRepository.byId(myPaymentId));
         changePassword(userService, myUserId);
         printAllUsers(userService);
+        printAllPayments(paymentService);
     }
 
     private static void createUser(UserService userService, UserId myUserId) {
@@ -54,5 +60,12 @@ public final class Main {
 
         final List<User> users = userService.all();
         users.forEach(System.out::println);
+    }
+
+    private static void printAllPayments(PaymentService paymentService) {
+        System.out.println("List all payments");
+
+        final List<Payment> payments = paymentService.all();
+        payments.forEach(System.out::println);
     }
 }

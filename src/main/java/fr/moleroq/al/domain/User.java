@@ -18,7 +18,7 @@ public final class User {
             user.changeState(UserState.CREATED);
             return user;
         }
-        user.changeState(UserState.CREATED_WITH_ERROR);
+        user.changeState(UserState.PENDING);
         throw new IllegalArgumentException("Illegal arguments");
     }
 
