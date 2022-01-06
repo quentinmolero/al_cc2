@@ -46,6 +46,10 @@ public final class User {
         return this.userCredentials.getPassword();
     }
 
+    public UserStateHistory getHistory() {
+        return history;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

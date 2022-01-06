@@ -18,6 +18,10 @@ public final class UserPaymentService {
         this.userPaymentRepository.save(user.getUserId(), payment.getPaymentId());
     }
 
+    public void create(UserId userId, PaymentId paymentId) {
+        this.userPaymentRepository.save(userId, paymentId);
+    }
+
     public Map<UserId, List<PaymentId>> all() {
         return new ConcurrentHashMap<>(this.userPaymentRepository.findAll());
     }
