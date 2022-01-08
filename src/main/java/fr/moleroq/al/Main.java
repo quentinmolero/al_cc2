@@ -42,13 +42,21 @@ public final class Main {
     }
 
     private static void createUser(UserService userService, UserId myUserId) {
-        User user = User.of(myUserId, "MOLERO", "Quentin", "PASSWORD");
-        userService.create(user);
+        try {
+            User user = User.of(myUserId, "MOLERO", "Quentin", "PASSWORD");
+            userService.create(user);
+        } catch (IllegalArgumentException e) {
+            System.out.println(ErrorEngine.getInstance().createError(e.getMessage()));
+        }
     }
 
     private static void createPayment(PaymentService paymentService, PaymentId paymentId) {
-        Payment payment = Payment.of(10_00, Date.from(Instant.now()), paymentId);
-        paymentService.create(payment);
+        try {
+            Payment payment = Payment.of(10_00, Date.from(Instant.now()), paymentId);
+            paymentService.create(payment);
+        } catch (IllegalArgumentException e) {
+            System.out.println(ErrorEngine.getInstance().createError(e.getMessage()));
+        }
     }
 
     private static void changePassword(UserService userService, UserId myUserId) {

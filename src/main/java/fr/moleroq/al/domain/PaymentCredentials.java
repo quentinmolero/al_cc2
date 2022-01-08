@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public final class PaymentCredentials {
+final class PaymentCredentials {
 
     private final long amount;
     private final Date date;

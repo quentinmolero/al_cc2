@@ -1,5 +1,7 @@
 package fr.moleroq.al.domain;
 
+import fr.moleroq.al.application.ValidationPaymentEngine;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,12 +13,12 @@ public final class Payment {
         this.paymentCredentials = PaymentCredentials.of(amount, date, paymentId);
     }
 
-    public static Payment of(long amount, Date date, PaymentId paymentId) {
+    public static Payment of(long amount, Date date, PaymentId paymentId) throws IllegalArgumentException {
         Payment payment =  new Payment(amount, date, paymentId);
         if (ValidationPaymentEngine.getInstance().test(payment)) {
             return payment;
         }
-        throw new IllegalStateException("Illegal arguments");
+        throw new IllegalArgumentException("Illegal arguments");
     }
 
     public long getAmount() {

@@ -7,8 +7,9 @@ import fr.moleroq.al.kernel.EventListener;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.Objects;
 
-public class UserSubscriptionListener implements EventListener<UserStartSubscription> {
+public final class UserSubscriptionListener implements EventListener<UserStartSubscription> {
 
     private final PaymentRepository paymentRepository;
     private final PaymentService paymentService;
@@ -26,5 +27,27 @@ public class UserSubscriptionListener implements EventListener<UserStartSubscrip
         Payment payment = Payment.of(10_00, Date.from(Instant.now()), paymentId);
         paymentService.create(payment);
         userPaymentService.create(event.getUser(), paymentRepository.byId(paymentId));
+    }
+
+    @Override
+    public String toString() {
+        return "UserSubscriptionListener{" +
+                "paymentRepository=" + paymentRepository +
+                ", paymentService=" + paymentService +
+                ", userPaymentService=" + userPaymentService +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserSubscriptionListener that = (UserSubscriptionListener) o;
+        return Objects.equals(paymentRepository, that.paymentRepository) && Objects.equals(paymentService, that.paymentService) && Objects.equals(userPaymentService, that.userPaymentService);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentRepository, paymentService, userPaymentService);
     }
 }

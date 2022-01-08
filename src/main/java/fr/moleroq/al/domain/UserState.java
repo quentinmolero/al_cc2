@@ -14,4 +14,11 @@ public enum UserState {
     public int getId() {
         return this.id;
     }
+
+    @Override
+    public String toString() {
+        return "UserState{" +
+                "id=" + id +
+                '}';
+    }
 }

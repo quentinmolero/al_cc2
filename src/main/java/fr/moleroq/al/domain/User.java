@@ -1,5 +1,7 @@
 package fr.moleroq.al.domain;
 
+import fr.moleroq.al.application.ValidationUserEngine;
+
 import java.util.Objects;
 
 public final class User {
@@ -12,7 +14,7 @@ public final class User {
         this.history = UserStateHistory.create(initialState);
     }
 
-    public static User of(UserId userId, String lastname, String firstname, String password) {
+    public static User of(UserId userId, String lastname, String firstname, String password) throws IllegalArgumentException{
         User user = new User(userId, lastname, firstname, password, UserState.IN_CREATION);
         if (ValidationUserEngine.getInstance().test(user)) {
             user.changeState(UserState.CREATED);

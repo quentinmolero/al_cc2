@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 @Engine
-public class MonthlyPaymentEngine extends Thread {
+public final class MonthlyPaymentEngine extends Thread {
 
     private static final MonthlyPaymentEngine INSTANCE = new MonthlyPaymentEngine();
     private static UserPaymentRepository userPaymentRepository;

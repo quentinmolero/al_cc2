@@ -17,9 +17,10 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
-public class PaymentController {
+final class PaymentController {
 
     private final QueryBus paymentsQueryBus;
     private final QueryBus paymentQueryBus;
@@ -53,5 +54,27 @@ public class PaymentController {
         CreatePayment createPayment = new CreatePayment(Date.from(Instant.now()), request.amount, UserId.of(Integer.parseInt(request.userId)));
         PaymentId paymentId = commandBus.send(createPayment);
         return ResponseEntity.created(URI.create("/payments/" + paymentId.getValue())).build();
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentController{" +
+                "paymentsQueryBus=" + paymentsQueryBus +
+                ", paymentQueryBus=" + paymentQueryBus +
+                ", commandBus=" + commandBus +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentController that = (PaymentController) o;
+        return Objects.equals(paymentsQueryBus, that.paymentsQueryBus) && Objects.equals(paymentQueryBus, that.paymentQueryBus) && Objects.equals(commandBus, that.commandBus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentsQueryBus, paymentQueryBus, commandBus);
     }
 }

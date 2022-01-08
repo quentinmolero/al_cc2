@@ -1,9 +1,6 @@
 package fr.moleroq.al;
 
-import fr.moleroq.al.application.CreateUser;
-import fr.moleroq.al.application.CreateUserCommandHandler;
-import fr.moleroq.al.application.MonthlyPaymentEngine;
-import fr.moleroq.al.application.PaymentService;
+import fr.moleroq.al.application.*;
 import fr.moleroq.al.domain.PaymentRepository;
 import fr.moleroq.al.domain.UserPaymentRepository;
 import org.springframework.boot.SpringApplication;
@@ -11,13 +8,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class SpringMain {
+class SpringMain {
     public static void main(String[] args) {
         final ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringMain.class, args);
 
         CreateUserCommandHandler userCommandHandler = applicationContext.getBean(CreateUserCommandHandler.class);
         CreateUser createUser = new CreateUser("MOLERO", "Quentin", "PASSWORD");
-        userCommandHandler.handle(createUser);
+        try {
+            userCommandHandler.handle(createUser);
+        } catch (IllegalArgumentException e) {
+            System.out.println(ErrorEngine.getInstance().createError(e.getMessage()));
+        }
 
         UserPaymentRepository userPaymentRepository = applicationContext.getBean(UserPaymentRepository.class);
         PaymentRepository paymentRepository = applicationContext.getBean(PaymentRepository.class);

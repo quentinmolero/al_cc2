@@ -3,8 +3,9 @@ package fr.moleroq.al.exposition;
 import fr.moleroq.al.domain.PaymentId;
 
 import java.util.Date;
+import java.util.Objects;
 
-public class PaymentDTO {
+public final class PaymentDTO {
 
     public final PaymentId paymentId;
     public final long amount;
@@ -23,5 +24,18 @@ public class PaymentDTO {
                 ", amount='" + amount + '\'' +
                 ", date='" + date + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentDTO that = (PaymentDTO) o;
+        return amount == that.amount && Objects.equals(paymentId, that.paymentId) && Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentId, amount, date);
     }
 }

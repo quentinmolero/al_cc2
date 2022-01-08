@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-public class UserConfiguration {
+class UserConfiguration {
 
     @Bean
     public UserRepository userRepository() {

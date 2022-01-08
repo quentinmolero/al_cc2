@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
-public class UserController {
+final class UserController {
 
     private final QueryBus usersQueryBus;
     private final QueryBus userQueryBus;
@@ -50,5 +51,27 @@ public class UserController {
         CreateUser createUser = new CreateUser(request.lastname, request.firstname, request.password);
         UserId userId = commandBus.send(createUser);
         return ResponseEntity.created(URI.create("/users/" + userId.getValue())).build();
+    }
+
+    @Override
+    public String toString() {
+        return "UserController{" +
+                "usersQueryBus=" + usersQueryBus +
+                ", userQueryBus=" + userQueryBus +
+                ", commandBus=" + commandBus +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserController that = (UserController) o;
+        return Objects.equals(usersQueryBus, that.usersQueryBus) && Objects.equals(userQueryBus, that.userQueryBus) && Objects.equals(commandBus, that.commandBus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usersQueryBus, userQueryBus, commandBus);
     }
 }

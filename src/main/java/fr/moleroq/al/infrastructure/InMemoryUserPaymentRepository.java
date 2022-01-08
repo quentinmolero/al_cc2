@@ -7,6 +7,7 @@ import fr.moleroq.al.domain.UserPaymentRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class InMemoryUserPaymentRepository implements UserPaymentRepository {
@@ -37,5 +38,25 @@ public final class InMemoryUserPaymentRepository implements UserPaymentRepositor
     @Override
     public Map<UserId, List<PaymentId>> findAll() {
         return new ConcurrentHashMap<>(data);
+    }
+
+    @Override
+    public String toString() {
+        return "InMemoryUserPaymentRepository{" +
+                "data=" + data +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InMemoryUserPaymentRepository that = (InMemoryUserPaymentRepository) o;
+        return Objects.equals(data, that.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data);
     }
 }

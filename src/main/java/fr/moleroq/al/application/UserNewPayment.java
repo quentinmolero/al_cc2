@@ -6,7 +6,7 @@ import fr.moleroq.al.kernel.ApplicationEvent;
 
 import java.util.Objects;
 
-public class UserNewPayment implements ApplicationEvent {
+public final class UserNewPayment implements ApplicationEvent {
 
     private final UserId userId;
     private final PaymentId paymentId;
@@ -22,6 +22,14 @@ public class UserNewPayment implements ApplicationEvent {
 
     public PaymentId getPaymentId() {
         return paymentId;
+    }
+
+    @Override
+    public String toString() {
+        return "UserNewPayment{" +
+                "userId=" + userId +
+                ", paymentId=" + paymentId +
+                '}';
     }
 
     @Override

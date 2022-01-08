@@ -5,9 +5,10 @@ import fr.moleroq.al.exposition.PaymentDTO;
 import fr.moleroq.al.kernel.QueryHandler;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class RetrievePaymentsHandler implements QueryHandler<RetrievePayments, List<PaymentDTO>> {
+public final class RetrievePaymentsHandler implements QueryHandler<RetrievePayments, List<PaymentDTO>> {
 
     private final PaymentRepository paymentRepository;
 
@@ -23,5 +24,25 @@ public class RetrievePaymentsHandler implements QueryHandler<RetrievePayments, L
                         new PaymentDTO(payment.getPaymentId(), payment.getAmount(),
                                 payment.getPaymentDate()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return "RetrievePaymentsHandler{" +
+                "paymentRepository=" + paymentRepository +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RetrievePaymentsHandler that = (RetrievePaymentsHandler) o;
+        return Objects.equals(paymentRepository, that.paymentRepository);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentRepository);
     }
 }

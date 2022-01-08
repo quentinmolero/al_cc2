@@ -5,7 +5,7 @@ import fr.moleroq.al.kernel.ApplicationEvent;
 
 import java.util.Objects;
 
-public class UserStartSubscription implements ApplicationEvent {
+public final class UserStartSubscription implements ApplicationEvent {
 
     private final User user;
 
@@ -15,6 +15,13 @@ public class UserStartSubscription implements ApplicationEvent {
 
     public User getUser() {
         return user;
+    }
+
+    @Override
+    public String toString() {
+        return "UserStartSubscription{" +
+                "user=" + user +
+                '}';
     }
 
     @Override

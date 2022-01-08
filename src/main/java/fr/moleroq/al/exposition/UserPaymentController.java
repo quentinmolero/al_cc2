@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
-public class UserPaymentController {
+final class UserPaymentController {
 
     private final QueryBus userPaymentsQueryBus;
     private final QueryBus userPaymentQueryBus;
@@ -38,5 +39,26 @@ public class UserPaymentController {
     public ResponseEntity<UserPaymentDTO> getUserPayment(@RequestParam(value = "userId") int userId) {
         final UserPaymentDTO userPayment = userPaymentQueryBus.send(new RetrieveUserPayment(UserId.of(userId)));
         return ResponseEntity.ok(userPayment);
+    }
+
+    @Override
+    public String toString() {
+        return "UserPaymentController{" +
+                "userPaymentsQueryBus=" + userPaymentsQueryBus +
+                ", userPaymentQueryBus=" + userPaymentQueryBus +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserPaymentController that = (UserPaymentController) o;
+        return Objects.equals(userPaymentsQueryBus, that.userPaymentsQueryBus) && Objects.equals(userPaymentQueryBus, that.userPaymentQueryBus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userPaymentsQueryBus, userPaymentQueryBus);
     }
 }

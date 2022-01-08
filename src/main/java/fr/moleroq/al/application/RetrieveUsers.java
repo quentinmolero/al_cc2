@@ -2,5 +2,5 @@ package fr.moleroq.al.application;
 
 import fr.moleroq.al.kernel.Query;
 
-public class RetrieveUsers implements Query {
+public final class RetrieveUsers implements Query {
 }

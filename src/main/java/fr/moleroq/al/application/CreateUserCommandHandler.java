@@ -7,7 +7,9 @@ import fr.moleroq.al.kernel.CommandHandler;
 import fr.moleroq.al.kernel.Event;
 import fr.moleroq.al.kernel.EventDispatcher;
 
-public class CreateUserCommandHandler implements CommandHandler<CreateUser, UserId> {
+import java.util.Objects;
+
+public final class CreateUserCommandHandler implements CommandHandler<CreateUser, UserId> {
 
     private final UserRepository userRepository;
     private final EventDispatcher<Event> eventEventDispatcher;
@@ -23,5 +25,26 @@ public class CreateUserCommandHandler implements CommandHandler<CreateUser, User
         userRepository.save(user);
         eventEventDispatcher.dispatch(new UserStartSubscription(user));
         return userId;
+    }
+
+    @Override
+    public String toString() {
+        return "CreateUserCommandHandler{" +
+                "userRepository=" + userRepository +
+                ", eventEventDispatcher=" + eventEventDispatcher +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreateUserCommandHandler that = (CreateUserCommandHandler) o;
+        return Objects.equals(userRepository, that.userRepository) && Objects.equals(eventEventDispatcher, that.eventEventDispatcher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userRepository, eventEventDispatcher);
     }
 }

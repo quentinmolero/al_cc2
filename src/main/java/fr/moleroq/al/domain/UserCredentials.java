@@ -2,7 +2,7 @@ package fr.moleroq.al.domain;
 
 import java.util.Objects;
 
-public final class UserCredentials {
+final class UserCredentials {
 
     private final UserId userId;
     private final String lastname;

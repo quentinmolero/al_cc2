@@ -7,7 +7,9 @@ import fr.moleroq.al.kernel.CommandHandler;
 import fr.moleroq.al.kernel.Event;
 import fr.moleroq.al.kernel.EventDispatcher;
 
-public class CreatePaymentCommandHandler implements CommandHandler<CreatePayment, PaymentId> {
+import java.util.Objects;
+
+public final class CreatePaymentCommandHandler implements CommandHandler<CreatePayment, PaymentId> {
 
     private final PaymentRepository paymentRepository;
     private final EventDispatcher<Event> eventEventDispatcher;
@@ -24,5 +26,26 @@ public class CreatePaymentCommandHandler implements CommandHandler<CreatePayment
         paymentRepository.save(payment);
         eventEventDispatcher.dispatch(new UserNewPayment(createPayment.userId, paymentId));
         return paymentId;
+    }
+
+    @Override
+    public String toString() {
+        return "CreatePaymentCommandHandler{" +
+                "paymentRepository=" + paymentRepository +
+                ", eventEventDispatcher=" + eventEventDispatcher +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreatePaymentCommandHandler that = (CreatePaymentCommandHandler) o;
+        return Objects.equals(paymentRepository, that.paymentRepository) && Objects.equals(eventEventDispatcher, that.eventEventDispatcher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentRepository, eventEventDispatcher);
     }
 }

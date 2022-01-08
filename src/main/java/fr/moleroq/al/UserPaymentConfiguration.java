@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @Configuration
-public class UserPaymentConfiguration {
+class UserPaymentConfiguration {
 
     @Bean
     public UserPaymentRepository userPaymentRepository() {
