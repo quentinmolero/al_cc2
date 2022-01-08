@@ -2,7 +2,10 @@ package fr.moleroq.al;
 
 import fr.moleroq.al.application.CreateUser;
 import fr.moleroq.al.application.CreateUserCommandHandler;
-import fr.moleroq.al.domain.UserId;
+import fr.moleroq.al.application.MonthlyPaymentEngine;
+import fr.moleroq.al.application.PaymentService;
+import fr.moleroq.al.domain.PaymentRepository;
+import fr.moleroq.al.domain.UserPaymentRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,6 +17,13 @@ public class SpringMain {
 
         CreateUserCommandHandler userCommandHandler = applicationContext.getBean(CreateUserCommandHandler.class);
         CreateUser createUser = new CreateUser("MOLERO", "Quentin", "PASSWORD");
-        final UserId userId = userCommandHandler.handle(createUser);
+        userCommandHandler.handle(createUser);
+
+        UserPaymentRepository userPaymentRepository = applicationContext.getBean(UserPaymentRepository.class);
+        PaymentRepository paymentRepository = applicationContext.getBean(PaymentRepository.class);
+        PaymentService paymentService = applicationContext.getBean(PaymentService.class);
+
+        MonthlyPaymentEngine.setupInstance(userPaymentRepository, paymentService, paymentRepository);
+        MonthlyPaymentEngine.getInstance().start();
     }
 }
